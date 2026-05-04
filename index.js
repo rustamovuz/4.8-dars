@@ -1,16 +1,22 @@
-const express = require("express")
+const express = require("express");
 const cors = require("cors")
-const authRouter = require("./router/auth.routes")
-require("dotenv").config()
+require('dotenv').config()
+const authRouter  = require("./router/auth.routes");
+const productRouter = require("./router/product.routes");
+const carRouter = require("./router/car.routes")
 
-const app = express()
-const PORT = process.env.PORT || 3000
-app.use(cors())
+const app = express();
+const PORT = process.env.PORT || 5000;
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+app.use(cors())
 
-// router
-app.use("/auth", authRouter)
+// ROUTER
+app.use("/auth", authRouter);
+app.use(productRouter)
+app.use(carRouter)
 
 app.listen(PORT, () => {
   console.log("Server is running at: http://localhost:" + PORT);
-})
+  
+});
